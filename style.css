@@ -1,0 +1,39 @@
+body html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#ourDiv {
+    display:flex;
+}
+
+
+.product-column{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+}
+
+.product-column > input{
+    margin: 5px;
+    margin-left: 5em;
+}
+
+
+
+button {
+    margin-top: 20px;
+    line-height: 40px;
+    font-weight: bold;
+    padding: 0 40px;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+  }
+  button:hover {
+    background: rgb(101, 116, 199);
+  }
+
+  
