@@ -4,16 +4,52 @@ body html {
     padding: 0;
 }
 
-#ourDiv {
-    display:flex;
-}
+/* .container {
+    display: flex;
+} */
 
-
-.product-column{
+.titleColumn {
     display: flex;
     flex-direction: column;
+    margin: 0;
+}
+.titleColumn p{
+    margin: 7px;
+}
+
+.top-wrapper {
+    display: flex;
+    /* flex-wrap: wrap; */ 
+}
+
+.top-wrapper-button {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#ourDiv {
+    display: flex;
     width: fit-content;
-    justify-content: center;
+    
+}
+
+.bottom-wrapper {
+    display: flex;
+}
+
+.lower-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.daily-servings {
+    margin-left: 8em;
+
+}
+
+#term-days-id {
+    margin: 1em;
 }
 
 .product-column > input{
@@ -31,6 +67,9 @@ button {
     border: none;
     border-radius: 10px;
     margin: 10px;
+    /* position: absolute;
+    bottom: 1em;
+    right: 1em; */ 
   }
   button:hover {
     background: rgb(101, 116, 199);

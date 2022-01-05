@@ -7,6 +7,7 @@ class Product {
         this.name = "";
         this.price = 0;
         this.servings = 0;
+        this.dailyServings = null;
         this.name = name;
         this.servings = servings;
         this.price = price;
@@ -15,37 +16,47 @@ class Product {
         return this.price / this.servings;
     }
     HTML(div) {
-        // let section = document.createElement('section')
-        // div.appendChild(section)
-        let productColumn = document.createElement('div');
-        productColumn.classList.add('product-column');
-        div.appendChild(productColumn);
+        let firstDiv = document.createElement('div');
+        firstDiv.classList.add('product-column');
+        div.appendChild(firstDiv);
         let productName = document.createElement('input');
         productName.value = this.name;
-        productColumn.appendChild(div.appendChild(productName));
+        firstDiv.appendChild(div.appendChild(productName));
         let productPrice = document.createElement('input');
         productPrice.value = this.price.toString();
-        productColumn.appendChild(div.appendChild(productPrice));
+        firstDiv.appendChild(div.appendChild(productPrice));
         let productServings = document.createElement('input');
         productServings.value = this.servings.toString();
-        productColumn.appendChild(div.appendChild(productServings));
-        let dailyServings = document.createElement("input");
-        dailyServings.value = this.servings.toString();
-        lowerDiv.appendChild(div.appendChild(dailyServings));
+        firstDiv.appendChild(div.appendChild(productServings));
+        this.dailyServings = document.createElement("input");
+        this.dailyServings.value = this.servings.toString();
+        this.dailyServings.classList.add("daily-servings");
+        servingsDiv.appendChild(div.appendChild(this.dailyServings));
     }
 }
-let ourDiv = document.createElement("div");
-ourDiv.id = "ourDiv";
-ourDiv.innerText = "Products";
-document.body.appendChild(ourDiv);
+// the biggest Div(container)
+let container = document.createElement("div");
+container.classList.add("container");
+document.body.appendChild(container);
+let topWrapperAndBtn = document.createElement("div");
+topWrapperAndBtn.classList.add("top-wrapper-button");
+container.appendChild(topWrapperAndBtn);
+let topWrapper = document.createElement("div");
+topWrapper.classList.add("top-wrapper");
+topWrapperAndBtn.appendChild(topWrapper);
+let bottomWrapper = document.createElement("div");
+bottomWrapper.classList.add("bottom-wrapper");
+container.appendChild(bottomWrapper);
 let lowerDiv = document.createElement("div");
-lowerDiv.id = "lowerDiv";
-lowerDiv.innerText = "Consumption";
-document.body.appendChild(lowerDiv);
+lowerDiv.classList.add("lower-div");
+lowerDiv.innerText = "How many servings do you have per day?";
+bottomWrapper.appendChild(lowerDiv);
+let servingsDiv = document.createElement("div");
+lowerDiv.appendChild(servingsDiv);
 // the Title section of product
 let titleColumn = document.createElement('div');
-titleColumn.classList.add('titleColuumn');
-document.body.appendChild(titleColumn);
+titleColumn.classList.add('titleColumn');
+topWrapper.appendChild(titleColumn);
 let NameTitle = document.createElement('p');
 NameTitle.innerText = 'Name';
 titleColumn.appendChild(NameTitle);
@@ -55,17 +66,24 @@ titleColumn.appendChild(priceTitle);
 let servingsTitle = document.createElement('p');
 servingsTitle.innerText = 'Servings';
 titleColumn.appendChild(servingsTitle);
+// ourDiv 
+let ourDiv = document.createElement("div");
+ourDiv.id = "ourDiv";
+ourDiv.innerText = "Products";
+topWrapper.appendChild(ourDiv);
 // creating the array of product
 let products = [];
 products.push(new Product("Coffee", 1000, 100));
 products.push(new Product("Milk", 1200, 100));
-// products.push(new Product("Sugar", 900, 100))
-// products.push(new Product("Tea", 800, 100))
+products.push(new Product("Sugar", 900, 100));
+products.push(new Product("Tea", 800, 100));
 displayProducts();
-// add Button 
+// add Button
+let addButtonDiv = document.createElement("div");
+topWrapperAndBtn.appendChild(addButtonDiv);
 let addButton = document.createElement("button");
 addButton.innerHTML = 'Add';
-document.body.appendChild(addButton);
+topWrapper.appendChild(addButton);
 addButton.addEventListener('click', addProduct);
 function addProduct() {
     products.push(new Product("", 0, 1));
@@ -77,18 +95,30 @@ function displayProducts() {
         products[i].HTML(ourDiv);
     }
 }
-// calculate Cost of term 
-let dailyServings = 2;
-let termDays = 100;
-// let termDays: number = 100
+// calculate Cost per Term 
+let termDaysDiv = document.createElement("div");
+termDaysDiv.innerText = "Days in a term:";
+termDaysDiv.id = "term-days-id";
+lowerDiv.appendChild(termDaysDiv);
+let termDays = document.createElement("input");
+termDays.value = termDays.value.toString();
+termDays.id = "termDays";
+termDaysDiv.appendChild(termDays);
 function termCost() {
-    return products[0].pricePerServing() * dailyServings * termDays;
+    console.log(termCost);
+    let totalCost = 0;
+    for (let i = 0; i < products.length; i++) {
+        totalCost += products[i].pricePerServing() * parseInt(products[i].dailyServings.value) * parseInt(termDays.value);
+    }
+    return totalCost;
 }
 let termCostBtn = document.createElement("button");
 termCostBtn.innerHTML = 'Calculate';
 document.body.appendChild(termCostBtn);
-termCostBtn.addEventListener('click', termCost);
-let finalCost = document.createElement("p");
-finalCost.innerText = `This term you need to pay ${termCost()}`;
-document.body.appendChild(finalCost);
+termCostBtn.addEventListener('click', calc);
+function calc() {
+    let finalCost = document.createElement("p");
+    finalCost.innerText = `This term you need to pay ${termCost()}`;
+    document.body.appendChild(finalCost);
+}
 //# sourceMappingURL=script.js.map
